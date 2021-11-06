@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MenuActivity">
+
+    <TextView
+        android:id="@+id/menuTextView"
+        android:text="@string/menuText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/easyModeButton"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/easyModeButton"
+        android:text="@string/easyModeButtonText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:onClick="startEasyGame"/>
+
+    <Button
+        android:id="@+id/hardModeButton"
+        android:text="@string/hardModeButtonText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/easyModeButton"
+        android:layout_centerHorizontal="true"
+        android:onClick="startHardGame"/>
+</RelativeLayout>

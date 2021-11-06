@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Coding Game Project</string>
+    <string name="easyModeButtonText">Easy</string>
+    <string name="menuText">Please select a difficulty to play</string>
+    <string name="hardModeButtonText">Hard</string>
+</resources>
