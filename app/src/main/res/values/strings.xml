@@ -3,4 +3,6 @@
     <string name="easyModeButtonText">Easy</string>
     <string name="menuText">Please select a difficulty to play</string>
     <string name="hardModeButtonText">Hard</string>
+    <string name="nextLevelText">Next Level</string>
+    <string name="mainMenuText">Main Menu</string>
 </resources>

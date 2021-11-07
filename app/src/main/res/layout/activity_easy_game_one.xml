@@ -11,9 +11,26 @@
 
     <ImageView
         android:id="@+id/pathIV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:src="@drawable/path"/>
+
+    <ImageView
+        android:id="@+id/pathIV2"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:rotation="90"
+        android:src="@drawable/path"
+        android:translationX="127dp"
+        android:translationY="90dp" />
+
+    <ImageView
+        android:id="@+id/pathIV3"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:src="@drawable/path"
+        android:translationX="235dp"
+        android:translationY="210dp" />
 
     <ImageView
         android:id="@+id/meeseeksIV"
@@ -22,12 +39,6 @@
         android:layout_alignParentLeft="true"
         android:src="@drawable/meeseeks"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="move this character"
-        android:layout_alignParentBottom="true"
-        android:onClick="moveCharacter"/>
 
     <ImageView
         android:id="@+id/arrowLeft"
@@ -60,6 +71,93 @@
         android:layout_toLeftOf="@+id/arrowUp"
         android:src="@drawable/ic_arrow_down"
        />
+
+    <ImageView
+        android:id="@+id/playButton"
+        android:layout_width="50sp"
+        android:layout_height="50sp"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_play_circle"
+        android:layout_toLeftOf="@+id/arrowDown"
+        android:onClick="checkAnswer"/>
+
+    <Button
+        android:id="@+id/firstStepBox"
+        android:layout_width="100sp"
+        android:backgroundTint="@color/stepBackGroundColor"
+        android:textColor="@color/white"
+        android:enabled="false"
+        android:layout_height="70sp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/arrowLeft"
+        android:visibility="invisible"/>
+
+    <Button
+        android:id="@+id/secondStepBox"
+        android:layout_width="100sp"
+        android:layout_height="70sp"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/stepBackGroundColor"
+        android:enabled="false"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/firstStepBox"
+        android:visibility="invisible"/>
+
+    <Button
+        android:id="@+id/thirdStepBox"
+        android:layout_width="100sp"
+        android:layout_height="70sp"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/stepBackGroundColor"
+        android:enabled="false"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/secondStepBox"
+        android:visibility="invisible"/>
+
+    <Button
+        android:id="@+id/fourthStepBox"
+        android:layout_width="100sp"
+        android:layout_height="70sp"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/stepBackGroundColor"
+        android:enabled="false"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/thirdStepBox"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/youWinImageView"
+        android:layout_width="200sp"
+        android:layout_height="200sp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/you_win"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"/>
+
+    <Button
+        android:id="@+id/nextLevelButton"
+        android:layout_width="100sp"
+        android:layout_height="60sp"
+        android:layout_below="@+id/youWinImageView"
+        android:layout_centerHorizontal="true"
+        android:layout_alignLeft="@id/youWinImageView"
+        android:backgroundTint="@color/stepBackGroundColor"
+        android:visibility="invisible"
+        android:onClick="moveToNextLevel"
+        android:text="@string/nextLevelText"/>
+
+    <Button
+        android:id="@+id/mainMenuButton"
+        android:layout_width="100sp"
+        android:layout_height="60sp"
+        android:layout_toRightOf="@+id/nextLevelButton"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/youWinImageView"
+        android:backgroundTint="@color/stepBackGroundColor"
+        android:visibility="invisible"
+        android:onClick="goToMainMenu"
+        android:text="@string/mainMenuText"/>
+
 
 
 
