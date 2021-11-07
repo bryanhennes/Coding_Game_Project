@@ -6,38 +6,49 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:background="@drawable/grass"
-    tools:context=".EasyGameOneActivity">
+    tools:context=".HardGameOneActivity">
 
 
     <ImageView
         android:id="@+id/pathIV"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:src="@drawable/path"/>
+        android:rotation="90"
+        android:src="@drawable/path"
+        android:translationX="-110dp"
+        android:translationY="100dp" />
 
     <ImageView
         android:id="@+id/pathIV2"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:rotation="90"
         android:src="@drawable/path"
-        android:translationX="127dp"
-        android:translationY="90dp" />
+        android:translationY="220dp" />
 
     <ImageView
         android:id="@+id/pathIV3"
         android:layout_width="250dp"
         android:layout_height="250dp"
+        android:rotation="90"
         android:src="@drawable/path"
-        android:translationX="235dp"
-        android:translationY="210dp" />
+        android:translationX="115dp"
+        android:translationY="110dp" />
+
+    <ImageView
+        android:id="@+id/pathIV4"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:src="@drawable/path"
+        android:translationX="223dp"
+        android:translationY="0dp" />
 
     <ImageView
         android:id="@+id/meeseeksIV"
         android:layout_width="30sp"
         android:layout_height="30sp"
         android:layout_alignParentLeft="true"
-        android:src="@drawable/meeseeks"/>
+        android:src="@drawable/meeseeks"
+        android:translationY="100dp" />
 
 
     <ImageView
@@ -70,7 +81,7 @@
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/arrowUp"
         android:src="@drawable/ic_arrow_down"
-       />
+        />
 
     <ImageView
         android:id="@+id/playButton"
@@ -139,30 +150,24 @@
         android:layout_width="100sp"
         android:layout_height="60sp"
         android:layout_below="@+id/youWinImageView"
-        android:layout_centerHorizontal="true"
         android:layout_alignLeft="@id/youWinImageView"
+        android:layout_centerHorizontal="true"
         android:backgroundTint="@color/stepBackGroundColor"
-        android:visibility="invisible"
         android:onClick="moveToNextLevel"
-        android:text="@string/nextLevelText"/>
+        android:text="@string/nextLevelText"
+        android:visibility="invisible" />
 
     <Button
         android:id="@+id/mainMenuButton"
         android:layout_width="100sp"
         android:layout_height="60sp"
-        android:layout_toRightOf="@+id/nextLevelButton"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/youWinImageView"
+        android:layout_centerHorizontal="true"
+        android:layout_toRightOf="@+id/nextLevelButton"
         android:backgroundTint="@color/stepBackGroundColor"
-        android:visibility="invisible"
         android:onClick="goToMainMenu"
-        android:text="@string/mainMenuText"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="skip"
-        android:onClick="test"/>
+        android:text="@string/mainMenuText"
+        android:visibility="invisible" />
 
 
 

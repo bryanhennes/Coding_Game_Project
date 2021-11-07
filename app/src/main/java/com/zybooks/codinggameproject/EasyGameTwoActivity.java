@@ -3,33 +3,18 @@ package com.zybooks.codinggameproject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.Animator;
-import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
-import android.content.ClipData;
-import android.content.ClipDescription;
 import android.content.Intent;
-import android.graphics.Path;
-import android.media.Image;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.AnimationUtils;
-import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
-import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import java.net.NoRouteToHostException;
 import java.util.Arrays;
 
-
-public class EasyGameOneActivity extends AppCompatActivity {
-
+public class EasyGameTwoActivity extends AppCompatActivity {
     ImageView iv;
     ImageView leftArrow;
     ImageView rightArrow;
@@ -42,12 +27,10 @@ public class EasyGameOneActivity extends AppCompatActivity {
     Button firstStep;
     Button secondStep;
     Button thirdStep;
+    Button fourthStep;
     Button nextLevel;
     Button mainMenu;
     final int ANIMATION_DURATION = 1500;
-    boolean firstMoveCorrect;
-    boolean secondMoveCorrect;
-    boolean thirdMoveCorrect;
     private android.widget.RelativeLayout.LayoutParams layoutParams;
 
     int firstPathStartX;
@@ -58,23 +41,26 @@ public class EasyGameOneActivity extends AppCompatActivity {
     int secondPathStartY;
     int secondPathEndX;
     int secondPathEndY;
+    //to do: implement counter that tracks how many attempts each level takes user
     int totalAttempts;
 
-    private ObjectAnimator animatorRight;
-    private ObjectAnimator animatorDown;
+    private ObjectAnimator animatorFirst;
+    private ObjectAnimator animatorSecond;
+    private ObjectAnimator animatorThird;
+    private ObjectAnimator animatorFourth;
     final int PATH_LENGTH = 645;
-    String answers[] = new String[3];
-    String correctAnswers[] = {"right", "down", "right"}; //array of correct sequence to beat game
+    String answers[] = new String[4];
+    String correctAnswers[] = {"down", "right", "up", "right"}; //array of correct sequence to beat game
     String currentAnswer= "";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_easy_game_one);
+        setContentView(R.layout.activity_easy_game_two);
 
         iv = (ImageView) findViewById(R.id.meeseeksIV);
-        iv.setX(50);
+        //iv.setX(50);
         leftArrow = (ImageView) findViewById(R.id.arrowLeft);
 
         //check when user clicks left arrow
@@ -120,23 +106,6 @@ public class EasyGameOneActivity extends AppCompatActivity {
             }
         });
 
-        firstPathStartX = 50;
-        firstPathStartY = -50;
-        firstPathEndX = 300;
-        firstPathEndY = 200;
-
-        secondPathStartX = 200;
-        secondPathStartY = -50;
-        secondPathEndX = 200;
-        secondPathEndY = 100;
-
-        pathImage = (ImageView) findViewById(R.id.pathIV);
-        pathImage.setX(firstPathStartX);
-        pathImage.setY(firstPathStartY);
-        pathImage2 = (ImageView)findViewById(R.id.pathIV2);
-
-        iv.setX(firstPathStartX);
-        iv.setY(250);
 
         totalAttempts = 0;
 
@@ -145,6 +114,7 @@ public class EasyGameOneActivity extends AppCompatActivity {
         firstStep = (Button) findViewById(R.id.firstStepBox);
         secondStep = (Button) findViewById(R.id.secondStepBox);
         thirdStep = (Button) findViewById(R.id.thirdStepBox);
+        fourthStep = (Button)findViewById(R.id.fourthStepBox);
 
         youWinImage = (ImageView) findViewById(R.id.youWinImageView);
 
@@ -158,19 +128,19 @@ public class EasyGameOneActivity extends AppCompatActivity {
     //if all directions are correct, move character to the end
     public void moveCharacter(View view) {
 
-        //initalze first animation from left to right
-        animatorRight = ObjectAnimator.ofFloat(iv, "translationX", firstPathStartX, PATH_LENGTH);
-        animatorRight.setInterpolator(new LinearInterpolator());
-        animatorRight.setDuration(ANIMATION_DURATION);
-        animatorRight.start();
+        //initialize first animation from top to bottom
+        animatorFirst = ObjectAnimator.ofFloat(iv, "translationY", iv.getY(), PATH_LENGTH +260);
+        animatorFirst.setInterpolator(new LinearInterpolator());
+        animatorFirst.setDuration(ANIMATION_DURATION);
+        animatorFirst.start();
 
-        //initialize second animation from top to bottom
-        animatorDown = ObjectAnimator.ofFloat(iv, "translationY", 350, PATH_LENGTH +227);
-        animatorDown.setInterpolator(new LinearInterpolator());
-        animatorDown.setDuration(ANIMATION_DURATION);
+        //initialize second animation from left to right
+        animatorSecond = ObjectAnimator.ofFloat(iv, "translationX", iv.getX(), PATH_LENGTH-18 );
+        animatorSecond.setInterpolator(new LinearInterpolator());
+        animatorSecond.setDuration(ANIMATION_DURATION);
 
         //track first animation
-        animatorRight.addListener(new Animator.AnimatorListener() {
+        animatorFirst.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animator) {
 
@@ -178,7 +148,7 @@ public class EasyGameOneActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animator animator) {
-                animatorDown.start();
+                animatorSecond.start();
             }
 
             @Override
@@ -194,13 +164,14 @@ public class EasyGameOneActivity extends AppCompatActivity {
 
         });
 
-        //initalize third animation from left to right to finish
-        animatorRight = ObjectAnimator.ofFloat(iv, "translationX", PATH_LENGTH, PATH_LENGTH*2 - 25);
-        animatorRight.setInterpolator(new LinearInterpolator());
-        animatorRight.setDuration(ANIMATION_DURATION);
+
+        //initialize third animation from bottom to top
+        animatorThird = ObjectAnimator.ofFloat(iv, "translationY", iv.getY() +PATH_LENGTH-20, iv.getY()+30);
+        animatorThird.setInterpolator(new LinearInterpolator());
+        animatorThird.setDuration(ANIMATION_DURATION);
 
         //track second animation
-        animatorDown.addListener(new Animator.AnimatorListener() {
+        animatorSecond.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animator) {
 
@@ -208,7 +179,35 @@ public class EasyGameOneActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animator animator) {
-                animatorRight.start();
+                animatorThird.start();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+
+
+        });
+        animatorFourth = ObjectAnimator.ofFloat(iv, "translationX", iv.getX() +PATH_LENGTH, PATH_LENGTH*2-70);
+        animatorFourth.setInterpolator(new LinearInterpolator());
+        animatorFourth.setDuration(ANIMATION_DURATION);
+
+        //track the last animation
+        animatorThird.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                animatorFourth.start();
             }
 
             @Override
@@ -224,8 +223,7 @@ public class EasyGameOneActivity extends AppCompatActivity {
 
         });
 
-        //track the last animation
-        animatorRight.addListener(new Animator.AnimatorListener() {
+        animatorFourth.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animator) {
 
@@ -264,12 +262,14 @@ public class EasyGameOneActivity extends AppCompatActivity {
             playButton.setEnabled(false);
         }
         else {
-            answers = new String[3]; //clear array of answers so user can try again
+            answers = new String[4]; //clear array of answers so user can try again
             clearSteps(view);
-            Toast.makeText(EasyGameOneActivity.this, "Incorrect", Toast.LENGTH_LONG).show();
+            Toast.makeText(EasyGameTwoActivity.this, "Incorrect", Toast.LENGTH_LONG).show();
 
         }
+        //test animations
 
+        //moveCharacter(view);
 
     }
 
@@ -285,7 +285,7 @@ public class EasyGameOneActivity extends AppCompatActivity {
 
     //display each choice player makes on the right side of screen in form of disabled buttons
     public void showSteps(View view, String answer){
-        Button steps[] = {firstStep, secondStep, thirdStep};
+        Button steps[] = {firstStep, secondStep, thirdStep, fourthStep};
         for(int i = 0; i < steps.length; i++){
             if(steps[i].getText() == ""){
                 steps[i].setText(answer);
@@ -297,7 +297,7 @@ public class EasyGameOneActivity extends AppCompatActivity {
 
     //clear the choices off the right side of the screen when starting a new attempt
     public void clearSteps(View view){
-        Button steps[] = {firstStep, secondStep, thirdStep};
+        Button steps[] = {firstStep, secondStep, thirdStep, fourthStep};
         for(int i = 0; i < steps.length; i++){
             if(steps[i].getText() != ""){
                 steps[i].setText("");
@@ -306,17 +306,13 @@ public class EasyGameOneActivity extends AppCompatActivity {
         }
     }
 
-    //move to next level
+    //move to next level (if i make a third)
     public void moveToNextLevel(View view) {
-        startActivity(new Intent(getApplicationContext(), EasyGameTwoActivity.class));
+        startActivity(new Intent(getApplicationContext(), HardGameOneActivity.class));
     }
 
     //return to main menu
     public void goToMainMenu(View view) {
         startActivity(new Intent(getApplicationContext(), MenuActivity.class));
-    }
-
-    public void test(View view) {
-        startActivity(new Intent(getApplicationContext(), EasyGameTwoActivity.class));
     }
 }

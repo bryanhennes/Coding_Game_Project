@@ -21,5 +21,6 @@ public class MenuActivity extends AppCompatActivity {
 
     //bring player to hard game mode
     public void startHardGame(View view) {
+        startActivity(new Intent(getApplicationContext(), HardGameOneActivity.class));
     }
 }
