@@ -8,4 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="stepBackGroundColor">#368BD6</color>
+    <color name="red">#db0711</color>
+    <color name="buttonColor">#db7807</color>
 </resources>

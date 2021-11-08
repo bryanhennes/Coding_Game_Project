@@ -4,5 +4,22 @@
     <string name="menuText">Please select a difficulty to play</string>
     <string name="hardModeButtonText">Hard</string>
     <string name="nextLevelText">Next Level</string>
-    <string name="mainMenuText">Main Menu</string>
+    <string name="mainMenuText">Mr. Meeseeks Mover</string>
+    <string name="playButtonText">Play</string>
+    <string name="LoginText">Login</string>
+    <string name="registerText">Register</string>
+    <string name="dialog_title">Login</string>
+    <string name="username_dialog_hint">Username</string>
+    <string name="password_dialog_hint">Password</string>
+    <string name="confirm">Confirm</string>
+    <string name="register_title">Complete Fields Below to Register</string>
+    <string name="first_name_hint">First Name</string>
+    <string name="last_name_hint">Last Name</string>
+    <string name="dob_hint">Date of Birth</string>
+    <string name="email_hint">Email</string>
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="create_account_submission">Create Account</string>
+    <string name="welcome_textView">"Welcome "</string>
+    <string name="welcomeText">"Welcome "</string>
 </resources>

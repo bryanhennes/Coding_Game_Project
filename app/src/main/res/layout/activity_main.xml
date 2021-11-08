@@ -4,16 +4,88 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/mr_meeseeks_background"
     android:orientation="vertical"
     tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/mainTitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:shadowColor="@color/black"
+        android:paddingBottom="150sp"
+        android:textSize="60sp"
+        android:textStyle="bold"
+        android:shadowDx="-4"
+        android:shadowDy="-4"
+        android:shadowRadius="2"
+        android:textColor="@color/white"
+        android:text="@string/mainMenuText"
+        android:visibility="visible"/>
+
+    <TextView
+        android:id="@+id/welcome_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:shadowColor="@color/black"
+        android:paddingBottom="150sp"
+        android:textSize="60sp"
+        android:textStyle="bold"
+        android:shadowDx="-4"
+        android:shadowDy="-4"
+        android:shadowRadius="2"
+        android:textColor="@color/white"
+        android:text="@string/welcomeText"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/startGameButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="@color/buttonColor"
+        android:gravity="center"
+        android:onClick="signInOrCreateAccount"
+        android:text="@string/playButtonText"
+        android:visibility="visible"/>
+
+    <Button
+        android:id="@+id/prompt_login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="@color/buttonColor"
+        android:gravity="center"
+        android:onClick="enterCredentials"
+        android:text="@string/LoginText"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/register_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="@color/buttonColor"
+        android:gravity="center"
+        android:onClick="registerUser"
+        android:text="@string/registerText"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/playGameButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="@color/buttonColor"
         android:gravity="center"
         android:onClick="startGame"
-        android:text="Start Game!" />
+        android:text="@string/playButtonText"
+        android:visibility="invisible"/>
+
+
 
 </LinearLayout>
