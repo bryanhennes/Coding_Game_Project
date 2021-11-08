@@ -27,9 +27,11 @@ public class HardGameOneActivity extends AppCompatActivity {
     Button secondStep;
     Button thirdStep;
     Button fourthStep;
+    Button fifthStep;
+    Button sixthStep;
     Button nextLevel;
     Button mainMenu;
-    final int ANIMATION_DURATION = 1500;
+    final int ANIMATION_DURATION = 1000;
     private android.widget.RelativeLayout.LayoutParams layoutParams;
 
     int firstPathStartX;
@@ -47,9 +49,11 @@ public class HardGameOneActivity extends AppCompatActivity {
     private ObjectAnimator animatorSecond;
     private ObjectAnimator animatorThird;
     private ObjectAnimator animatorFourth;
+    private ObjectAnimator animatorFifth;
+    private ObjectAnimator animatorSixth;
     final int PATH_LENGTH = 645;
-    String answers[] = new String[4];
-    String correctAnswers[] = {"down", "right", "up", "right"}; //array of correct sequence to beat game
+    String answers[] = new String[6];
+    String correctAnswers[] = {"right", "up", "right", "down", "right", "up"}; //array of correct sequence to beat game
     String currentAnswer= "";
 
 
@@ -113,6 +117,8 @@ public class HardGameOneActivity extends AppCompatActivity {
         secondStep = (Button) findViewById(R.id.secondStepBox);
         thirdStep = (Button) findViewById(R.id.thirdStepBox);
         fourthStep = (Button)findViewById(R.id.fourthStepBox);
+        fifthStep = (Button)findViewById(R.id.fifthStepBox);
+        sixthStep = (Button)findViewById(R.id.sixthStepBox);
 
         youWinImage = (ImageView) findViewById(R.id.youWinImageView);
 
@@ -127,13 +133,13 @@ public class HardGameOneActivity extends AppCompatActivity {
     public void moveCharacter(View view) {
 
         //initialize first animation from top to bottom
-        animatorFirst = ObjectAnimator.ofFloat(iv, "translationY", iv.getY(), PATH_LENGTH +260);
+        animatorFirst = ObjectAnimator.ofFloat(iv, "translationX", iv.getX(), PATH_LENGTH/2-60);
         animatorFirst.setInterpolator(new LinearInterpolator());
         animatorFirst.setDuration(ANIMATION_DURATION);
         animatorFirst.start();
 
         //initialize second animation from left to right
-        animatorSecond = ObjectAnimator.ofFloat(iv, "translationX", iv.getX(), PATH_LENGTH-18 );
+        animatorSecond = ObjectAnimator.ofFloat(iv, "translationY", iv.getY(), PATH_LENGTH-255 );
         animatorSecond.setInterpolator(new LinearInterpolator());
         animatorSecond.setDuration(ANIMATION_DURATION);
 
@@ -146,6 +152,7 @@ public class HardGameOneActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animator animator) {
+
                 animatorSecond.start();
             }
 
@@ -164,7 +171,7 @@ public class HardGameOneActivity extends AppCompatActivity {
 
 
         //initialize third animation from bottom to top
-        animatorThird = ObjectAnimator.ofFloat(iv, "translationY", iv.getY() +PATH_LENGTH-20, iv.getY()+30);
+        animatorThird = ObjectAnimator.ofFloat(iv, "translationX", iv.getX() +(PATH_LENGTH/2-60), (PATH_LENGTH/2-30)*2);
         animatorThird.setInterpolator(new LinearInterpolator());
         animatorThird.setDuration(ANIMATION_DURATION);
 
@@ -192,7 +199,7 @@ public class HardGameOneActivity extends AppCompatActivity {
 
 
         });
-        animatorFourth = ObjectAnimator.ofFloat(iv, "translationX", iv.getX() +PATH_LENGTH, PATH_LENGTH*2-70);
+        animatorFourth = ObjectAnimator.ofFloat(iv, "translationY", iv.getY() -(PATH_LENGTH-300), (PATH_LENGTH-280)*2);
         animatorFourth.setInterpolator(new LinearInterpolator());
         animatorFourth.setDuration(ANIMATION_DURATION);
 
@@ -221,7 +228,71 @@ public class HardGameOneActivity extends AppCompatActivity {
 
         });
 
+        animatorFifth = ObjectAnimator.ofFloat(iv, "translationX", 600, (PATH_LENGTH/2)*3-50);
+        animatorFifth.setInterpolator(new LinearInterpolator());
+        animatorFifth.setDuration(ANIMATION_DURATION);
+
         animatorFourth.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                /*clearSteps(view);
+                youWinImage.setVisibility(View.VISIBLE);
+                nextLevel.setVisibility(View.VISIBLE);
+                mainMenu.setVisibility(View.VISIBLE);*/
+                animatorFifth.start();
+
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+
+
+        });
+        animatorSixth = ObjectAnimator.ofFloat(iv, "translationY", 700, 390 );
+        animatorSixth.setInterpolator(new LinearInterpolator());
+        animatorSixth.setDuration(ANIMATION_DURATION);
+
+        animatorFifth.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                /*clearSteps(view);
+                youWinImage.setVisibility(View.VISIBLE);
+                nextLevel.setVisibility(View.VISIBLE);
+                mainMenu.setVisibility(View.VISIBLE);*/
+                animatorSixth.start();
+
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+
+
+        });
+        animatorSixth.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animator) {
 
@@ -233,6 +304,7 @@ public class HardGameOneActivity extends AppCompatActivity {
                 youWinImage.setVisibility(View.VISIBLE);
                 nextLevel.setVisibility(View.VISIBLE);
                 mainMenu.setVisibility(View.VISIBLE);
+
             }
 
             @Override
@@ -260,7 +332,7 @@ public class HardGameOneActivity extends AppCompatActivity {
             playButton.setEnabled(false);
         }
         else {
-            answers = new String[4]; //clear array of answers so user can try again
+            answers = new String[6]; //clear array of answers so user can try again
             clearSteps(view);
             Toast.makeText(HardGameOneActivity.this, "Incorrect", Toast.LENGTH_LONG).show();
 
@@ -283,7 +355,7 @@ public class HardGameOneActivity extends AppCompatActivity {
 
     //display each choice player makes on the right side of screen in form of disabled buttons
     public void showSteps(View view, String answer){
-        Button steps[] = {firstStep, secondStep, thirdStep, fourthStep};
+        Button steps[] = {firstStep, secondStep, thirdStep, fourthStep, fifthStep, sixthStep};
         for(int i = 0; i < steps.length; i++){
             if(steps[i].getText() == ""){
                 steps[i].setText(answer);
@@ -295,7 +367,7 @@ public class HardGameOneActivity extends AppCompatActivity {
 
     //clear the choices off the right side of the screen when starting a new attempt
     public void clearSteps(View view){
-        Button steps[] = {firstStep, secondStep, thirdStep, fourthStep};
+        Button steps[] = {firstStep, secondStep, thirdStep, fourthStep, fifthStep, sixthStep};
         for(int i = 0; i < steps.length; i++){
             if(steps[i].getText() != ""){
                 steps[i].setText("");
