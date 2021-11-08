@@ -10,6 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.NoActionBar">
         <activity
+            android:name=".HardGameTwoActivity"
+            android:configChanges="orientation"
+            android:exported="true"
+            android:screenOrientation="sensorLandscape" />
+        <activity
             android:name=".HardGameOneActivity"
             android:configChanges="orientation"
             android:exported="true"

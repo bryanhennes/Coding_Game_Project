@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:background="@drawable/grass"
-    tools:context=".HardGameOneActivity">
+    tools:context=".HardGameTwoActivity">
 
 
     <ImageView
@@ -15,49 +15,84 @@
         android:layout_height="125dp"
         android:rotation="90"
         android:src="@drawable/small_path"
-        android:translationX="285dp"
-        android:translationY="142dp" />
+        android:translationX="260dp"
+        android:translationY="242dp" />
 
     <ImageView
         android:id="@+id/pathIV2"
         android:layout_width="125dp"
         android:layout_height="125dp"
+        android:rotation="90"
         android:src="@drawable/small_path"
-        android:translationY="220dp" />
+        android:translationX="-46dp"
+        android:translationY="242dp" />
 
     <ImageView
         android:id="@+id/pathIV3"
         android:layout_width="125dp"
         android:layout_height="125dp"
-        android:rotation="90"
         android:src="@drawable/small_path"
-        android:translationX="45dp"
-        android:translationY="142dp" />
+        android:translationX="30dp"
+        android:translationY="196dp" />
 
     <ImageView
         android:id="@+id/pathIV4"
         android:layout_width="125dp"
         android:layout_height="125dp"
+        android:rotation="90"
         android:src="@drawable/small_path"
-        android:translationX="120dp"
-        android:translationY="96dp" />
+        android:translationX="105dp"
+        android:translationY="242dp" />
 
     <ImageView
         android:id="@+id/pathIV5"
         android:layout_width="125dp"
         android:layout_height="125dp"
-        android:rotation="90"
         android:src="@drawable/small_path"
-        android:translationX="164dp"
-        android:translationY="175dp" />
+        android:translationX="183dp"
+        android:translationY="287dp" />
 
     <ImageView
         android:id="@+id/pathIV6"
         android:layout_width="125dp"
         android:layout_height="125dp"
         android:src="@drawable/small_path"
-        android:translationX="240dp"
-        android:translationY="220dp" />
+        android:translationX="338dp"
+        android:translationY="196dp" />
+
+    <ImageView
+        android:id="@+id/pathIV7"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:rotation="90"
+        android:src="@drawable/small_path"
+        android:translationX="382dp"
+        android:translationY="119dp" />
+
+    <ImageView
+        android:id="@+id/pathIV8"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:src="@drawable/small_path"
+        android:translationX="304dp"
+        android:translationY="73dp" />
+
+    <ImageView
+        android:id="@+id/pathIV9"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:rotation="90"
+        android:src="@drawable/small_path"
+        android:translationX="225dp"
+        android:translationY="28dp" />
+
+    <ImageView
+        android:id="@+id/pathIV10"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:src="@drawable/small_path"
+        android:translationX="147dp"
+        android:translationY="-18dp" />
 
     <ImageView
         android:id="@+id/meeseeksIV"
@@ -65,7 +100,7 @@
         android:layout_height="30sp"
         android:layout_alignParentLeft="true"
         android:src="@drawable/meeseeks"
-        android:translationY="267dp" />
+        android:translationY="335dp" />
 
 
     <ImageView
@@ -112,10 +147,12 @@
     <Button
         android:id="@+id/firstStepBox"
         android:layout_width="100sp"
+        android:padding="0sp"
         android:backgroundTint="@color/stepBackGroundColor"
         android:textColor="@color/white"
+        android:textSize="10sp"
         android:enabled="false"
-        android:layout_height="50sp"
+        android:layout_height="25sp"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/arrowLeft"
         android:visibility="invisible"/>
@@ -123,7 +160,9 @@
     <Button
         android:id="@+id/secondStepBox"
         android:layout_width="100sp"
-        android:layout_height="50sp"
+        android:padding="0sp"
+        android:textSize="10sp"
+        android:layout_height="25sp"
         android:textColor="@color/white"
         android:backgroundTint="@color/stepBackGroundColor"
         android:enabled="false"
@@ -134,7 +173,9 @@
     <Button
         android:id="@+id/thirdStepBox"
         android:layout_width="100sp"
-        android:layout_height="50sp"
+        android:padding="0sp"
+        android:layout_height="25sp"
+        android:textSize="10sp"
         android:textColor="@color/white"
         android:backgroundTint="@color/stepBackGroundColor"
         android:enabled="false"
@@ -145,7 +186,9 @@
     <Button
         android:id="@+id/fourthStepBox"
         android:layout_width="100sp"
-        android:layout_height="50sp"
+        android:padding="0sp"
+        android:layout_height="25sp"
+        android:textSize="10sp"
         android:textColor="@color/white"
         android:backgroundTint="@color/stepBackGroundColor"
         android:enabled="false"
@@ -155,7 +198,9 @@
     <Button
         android:id="@+id/fifthStepBox"
         android:layout_width="100sp"
-        android:layout_height="50sp"
+        android:padding="0sp"
+        android:layout_height="25sp"
+        android:textSize="10sp"
         android:textColor="@color/white"
         android:backgroundTint="@color/stepBackGroundColor"
         android:enabled="false"
@@ -165,13 +210,64 @@
     <Button
         android:id="@+id/sixthStepBox"
         android:layout_width="100sp"
-        android:layout_height="50sp"
+        android:padding="0sp"
+        android:layout_height="25sp"
+        android:textSize="10sp"
         android:textColor="@color/white"
         android:backgroundTint="@color/stepBackGroundColor"
         android:enabled="false"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/fifthStepBox"
         android:visibility="invisible"/>
+    <Button
+        android:id="@+id/seventhStepBox"
+        android:layout_width="100sp"
+        android:padding="0sp"
+        android:layout_height="25sp"
+        android:textSize="10sp"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/stepBackGroundColor"
+        android:enabled="false"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/sixthStepBox"
+        android:visibility="invisible"/>
+    <Button
+        android:id="@+id/eighthStepBox"
+        android:layout_width="100sp"
+        android:padding="0sp"
+        android:layout_height="25sp"
+        android:textSize="10sp"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/stepBackGroundColor"
+        android:enabled="false"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/seventhStepBox"
+        android:visibility="invisible"/>
+    <Button
+        android:id="@+id/ninthStepBox"
+        android:layout_width="100sp"
+        android:padding="0sp"
+        android:layout_height="25sp"
+        android:textSize="10sp"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/stepBackGroundColor"
+        android:enabled="false"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/eighthStepBox"
+        android:visibility="invisible"/>
+    <Button
+        android:id="@+id/tenthStepBox"
+        android:layout_width="100sp"
+        android:padding="0sp"
+        android:layout_height="25sp"
+        android:textSize="10sp"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/stepBackGroundColor"
+        android:enabled="false"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/ninthStepBox"
+        android:visibility="invisible"/>
+
 
     <ImageView
         android:id="@+id/youWinImageView"
@@ -179,8 +275,7 @@
         android:layout_height="200sp"
         android:layout_centerInParent="true"
         android:src="@drawable/you_win"
-        android:layout_centerHorizontal="true"
-        android:visibility="invisible"/>
+        android:visibility="invisible" />
 
     <Button
         android:id="@+id/nextLevelButton"
@@ -205,10 +300,8 @@
         android:onClick="goToMainMenu"
         android:text="@string/mainMenuText"
         android:visibility="invisible" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="skip"/>
+
+
 
 
 
