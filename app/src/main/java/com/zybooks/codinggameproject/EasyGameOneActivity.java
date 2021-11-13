@@ -1,5 +1,7 @@
 package com.zybooks.codinggameproject;
 
+import static com.zybooks.codinggameproject.RegisterActivity.MYPREF;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.Animator;
@@ -8,9 +10,12 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.ClipData;
 import android.content.ClipDescription;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Path;
 import android.media.Image;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,10 +27,14 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.net.NoRouteToHostException;
 import java.util.Arrays;
+import java.util.HashMap;
 
 
 public class EasyGameOneActivity extends AppCompatActivity {
@@ -44,6 +53,7 @@ public class EasyGameOneActivity extends AppCompatActivity {
     Button thirdStep;
     Button nextLevel;
     Button mainMenu;
+    TextView currentAttemptsTV;
     final int ANIMATION_DURATION = 1500;
     boolean firstMoveCorrect;
     boolean secondMoveCorrect;
@@ -67,11 +77,15 @@ public class EasyGameOneActivity extends AppCompatActivity {
     String correctAnswers[] = {"right", "down", "right"}; //array of correct sequence to beat game
     String currentAnswer= "";
 
+    MediaPlayer winSound;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_easy_game_one);
+
+
 
         iv = (ImageView) findViewById(R.id.meeseeksIV);
         iv.setX(50);
@@ -138,7 +152,9 @@ public class EasyGameOneActivity extends AppCompatActivity {
         iv.setX(firstPathStartX);
         iv.setY(250);
 
-        totalAttempts = 0;
+        totalAttempts = 1;
+        currentAttemptsTV = (TextView) findViewById(R.id.currentAttemptsTV);
+        currentAttemptsTV.setText("Total Attempts: "+ totalAttempts);
 
         playButton = (ImageView) findViewById(R.id.playButton);
 
@@ -150,6 +166,10 @@ public class EasyGameOneActivity extends AppCompatActivity {
 
         nextLevel = (Button) findViewById(R.id.nextLevelButton);
         mainMenu = (Button) findViewById(R.id.mainMenuButton);
+
+        //initialize winning sound
+        winSound = MediaPlayer.create(this.getApplicationContext(), R.raw.win_sound);
+
 
 
     }
@@ -234,6 +254,7 @@ public class EasyGameOneActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animator animator) {
                 clearSteps(view);
+                winSound.start();
                 youWinImage.setVisibility(View.VISIBLE);
                 nextLevel.setVisibility(View.VISIBLE);
                 mainMenu.setVisibility(View.VISIBLE);
@@ -264,7 +285,8 @@ public class EasyGameOneActivity extends AppCompatActivity {
             playButton.setEnabled(false);
         }
         else {
-            answers = new String[3]; //clear array of answers so user can try again
+            totalAttempts++;
+            currentAttemptsTV.setText("Total Attempts: "+ totalAttempts);
             clearSteps(view);
             Toast.makeText(EasyGameOneActivity.this, "Incorrect", Toast.LENGTH_LONG).show();
 
@@ -297,6 +319,7 @@ public class EasyGameOneActivity extends AppCompatActivity {
 
     //clear the choices off the right side of the screen when starting a new attempt
     public void clearSteps(View view){
+        answers = new String[3];
         Button steps[] = {firstStep, secondStep, thirdStep};
         for(int i = 0; i < steps.length; i++){
             if(steps[i].getText() != ""){
@@ -306,9 +329,14 @@ public class EasyGameOneActivity extends AppCompatActivity {
         }
     }
 
+
+
     //move to next level
     public void moveToNextLevel(View view) {
-        startActivity(new Intent(getApplicationContext(), EasyGameTwoActivity.class));
+        Intent intent = new Intent(this, EasyGameTwoActivity.class);
+        intent.putExtra("levelOneScore", totalAttempts);
+        startActivity(intent);
+
     }
 
     //return to main menu

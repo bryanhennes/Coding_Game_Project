@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Arrays;
@@ -24,6 +26,7 @@ public class EasyGameTwoActivity extends AppCompatActivity {
     ImageView pathImage2;
     ImageView playButton;
     ImageView youWinImage;
+    TextView currentAttempts;
     Button firstStep;
     Button secondStep;
     Button thirdStep;
@@ -41,6 +44,7 @@ public class EasyGameTwoActivity extends AppCompatActivity {
     int secondPathStartY;
     int secondPathEndX;
     int secondPathEndY;
+    int levelOneAttempts;
     //to do: implement counter that tracks how many attempts each level takes user
     int totalAttempts;
 
@@ -52,6 +56,8 @@ public class EasyGameTwoActivity extends AppCompatActivity {
     String answers[] = new String[4];
     String correctAnswers[] = {"down", "right", "up", "right"}; //array of correct sequence to beat game
     String currentAnswer= "";
+
+    MediaPlayer winSound;
 
 
     @Override
@@ -107,7 +113,12 @@ public class EasyGameTwoActivity extends AppCompatActivity {
         });
 
 
-        totalAttempts = 0;
+        totalAttempts = 1;
+        currentAttempts = (TextView) findViewById(R.id.currentAttemptsTV);
+        currentAttempts.setText("Total Attempts: " + totalAttempts);
+
+        Intent recInt = getIntent();
+        levelOneAttempts = recInt.getIntExtra("levelOneScore", levelOneAttempts);
 
         playButton = (ImageView) findViewById(R.id.playButton);
 
@@ -120,6 +131,8 @@ public class EasyGameTwoActivity extends AppCompatActivity {
 
         nextLevel = (Button) findViewById(R.id.nextLevelButton);
         mainMenu = (Button) findViewById(R.id.mainMenuButton);
+
+        winSound = MediaPlayer.create(this.getApplicationContext(), (R.raw.win_sound));
 
 
     }
@@ -232,6 +245,7 @@ public class EasyGameTwoActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animator animator) {
                 clearSteps(view);
+                winSound.start();
                 youWinImage.setVisibility(View.VISIBLE);
                 nextLevel.setVisibility(View.VISIBLE);
                 mainMenu.setVisibility(View.VISIBLE);
@@ -262,8 +276,9 @@ public class EasyGameTwoActivity extends AppCompatActivity {
             playButton.setEnabled(false);
         }
         else {
-            answers = new String[4]; //clear array of answers so user can try again
             clearSteps(view);
+            totalAttempts++;
+            currentAttempts.setText("Total Attempts: " + totalAttempts);
             Toast.makeText(EasyGameTwoActivity.this, "Incorrect", Toast.LENGTH_LONG).show();
 
         }
@@ -297,6 +312,7 @@ public class EasyGameTwoActivity extends AppCompatActivity {
 
     //clear the choices off the right side of the screen when starting a new attempt
     public void clearSteps(View view){
+        answers = new String[4];
         Button steps[] = {firstStep, secondStep, thirdStep, fourthStep};
         for(int i = 0; i < steps.length; i++){
             if(steps[i].getText() != ""){
@@ -308,7 +324,10 @@ public class EasyGameTwoActivity extends AppCompatActivity {
 
     //move to next level (if i make a third)
     public void moveToNextLevel(View view) {
-        startActivity(new Intent(getApplicationContext(), HardGameOneActivity.class));
+        Intent intent = new Intent(this, ResultsActivity.class);
+        intent.putExtra("levelOneScore", levelOneAttempts);
+        intent.putExtra("levelTwoScore", totalAttempts);
+        startActivity(intent);
     }
 
     //return to main menu

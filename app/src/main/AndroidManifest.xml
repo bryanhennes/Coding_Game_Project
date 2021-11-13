@@ -10,6 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.NoActionBar">
         <activity
+            android:name=".ResultsActivity"
+            android:configChanges="orientation"
+            android:exported="true"
+            android:screenOrientation="sensorLandscape" />
+        <activity
             android:name=".RegisterActivity"
             android:exported="true" />
         <activity

@@ -4,11 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/mr_meeseeks_background"
     android:orientation="vertical"
     tools:context=".MenuActivity">
 
     <TextView
         android:id="@+id/menuTextView"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:shadowColor="@color/black"
+        android:textSize="60sp"
+        android:textStyle="bold"
+        android:shadowDx="-4"
+        android:shadowDy="-4"
+        android:shadowRadius="2"
+        android:textColor="@color/white"
         android:text="@string/menuText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,7 +30,9 @@
         android:text="@string/easyModeButtonText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/buttonColor"
         android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
         android:onClick="startEasyGame"/>
 
     <Button
@@ -29,6 +41,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/easyModeButton"
+        android:layout_centerInParent="true"
+        android:backgroundTint="@color/buttonColor"
         android:layout_centerHorizontal="true"
         android:onClick="startHardGame"/>
 </RelativeLayout>

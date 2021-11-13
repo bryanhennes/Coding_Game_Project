@@ -5,12 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.Arrays;
 
@@ -35,10 +39,12 @@ public class HardGameTwoActivity extends AppCompatActivity {
     Button tenthStep;
     Button nextLevel;
     Button mainMenu;
+    TextView currentAttempts;
     final int ANIMATION_DURATION = 1000;
 
     //to do: implement counter that tracks how many attempts each level takes user
     int totalAttempts;
+    int levelOneAttempts;
 
     private ObjectAnimator animatorFirst;
     private ObjectAnimator animatorSecond;
@@ -54,6 +60,8 @@ public class HardGameTwoActivity extends AppCompatActivity {
     String answers[] = new String[10];
     String correctAnswers[] = {"up", "right", "down", "right", "up", "right", "up", "left", "up", "left"}; //array of correct sequence to beat game
     String currentAnswer= "";
+
+    MediaPlayer winSound;
 
 
     @Override
@@ -108,7 +116,12 @@ public class HardGameTwoActivity extends AppCompatActivity {
         });
 
 
-        totalAttempts = 0;
+        totalAttempts = 1;
+        currentAttempts = (TextView) findViewById(R.id.currentAttemptsTV);
+        currentAttempts.setText("Total Attempts: " + totalAttempts);
+
+        Intent recInt = getIntent();
+        levelOneAttempts = recInt.getIntExtra("levelOneScore", levelOneAttempts);
 
         playButton = (ImageView) findViewById(R.id.playButton);
 
@@ -127,6 +140,8 @@ public class HardGameTwoActivity extends AppCompatActivity {
 
         nextLevel = (Button) findViewById(R.id.nextLevelButton);
         mainMenu = (Button) findViewById(R.id.mainMenuButton);
+
+        winSound = MediaPlayer.create(this.getApplicationContext(), (R.raw.win_sound));
 
 
     }
@@ -409,6 +424,7 @@ public class HardGameTwoActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animator animator) {
                 clearSteps(view);
+                winSound.start();
                 youWinImage.setVisibility(View.VISIBLE);
                 nextLevel.setVisibility(View.VISIBLE);
                 mainMenu.setVisibility(View.VISIBLE);
@@ -441,8 +457,9 @@ public class HardGameTwoActivity extends AppCompatActivity {
             playButton.setEnabled(false);
         }
         else {
-            answers = new String[10]; //clear array of answers so user can try again
             clearSteps(view);
+            totalAttempts++;
+            currentAttempts.setText("Total Attempts: " + totalAttempts);
             Toast.makeText(HardGameTwoActivity.this, "Incorrect", Toast.LENGTH_LONG).show();
 
         }
@@ -474,6 +491,7 @@ public class HardGameTwoActivity extends AppCompatActivity {
 
     //clear the choices off the right side of the screen when starting a new attempt
     public void clearSteps(View view){
+        answers = new String[10];
         Button steps[] = {firstStep, secondStep, thirdStep, fourthStep, fifthStep, sixthStep, seventhStep, eighthStep, ninthStep, tenthStep};
         for(int i = 0; i < steps.length; i++){
             if(steps[i].getText() != ""){
@@ -485,7 +503,10 @@ public class HardGameTwoActivity extends AppCompatActivity {
 
     //move to next level (if i make a third)
     public void moveToNextLevel(View view) {
-        startActivity(new Intent(getApplicationContext(), HardGameOneActivity.class));
+        Intent intent = new Intent(this, ResultsActivity.class);
+        intent.putExtra("levelOneScore", levelOneAttempts);
+        intent.putExtra("levelTwoScore", totalAttempts);
+        startActivity(intent);
     }
 
     //return to main menu
